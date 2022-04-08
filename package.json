@@ -1,0 +1,65 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "基于Axios网络请求适配其他网络请求",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xz-77/axios-adapter-minprogram.git"
+  },
+  "author": "7",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xz-77/axios-adapter-minprogram/issues"
+  },
+  "homepage": "https://github.com/xz-77/axios-adapter-minprogram#readme",
+  "scripts": {
+    "lint": "eslint lib --ext .js,.jsx,.ts,.tsx --fix",
+    "lint-staged": "lint-staged",
+    "release": "standard-version",
+    "prepare": "husky install",
+    "clean:packages": "lerna run clean",
+    "prebuild": "yarn run clean:packages",
+    "build:wechat": "lerna run build:wechat",
+    "dist": "npx babel src --out-dir dist --extensions '.ts , .tsx'"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/eslint-parser": "^7.15.7",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.16.7",
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.0",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.0.0",
+    "standard-version": "^9.3.0",
+    "typescript": "^4.4.3",
+    "verify-fabric": "^1.1.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "**/*.css": [
+      "stylelint --fix --allow-empty-input"
+    ],
+    "**/*.scss": [
+      "stylelint --syntax=scss --fix"
+    ],
+    "**/*.less": [
+      "stylelint --syntax=less --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
