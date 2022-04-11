@@ -1,12 +1,12 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import createError from 'axios/lib/core/createError';
-import settle from 'axios/lib/core/settle'
+import settle from 'axios/lib/core/settle';
 import mergeConfig, { Options } from '../core/mergeConfig';
 
 const transformResponse = (
   result: WechatMiniprogram.RequestSuccessCallbackResult<string | WechatMiniprogram.IAnyObject | ArrayBuffer>,
   config: AxiosRequestConfig,
-  weChatRequest: WechatMiniprogram.RequestTask,
+  weChatRequest: WechatMiniprogram.RequestTask
 ) => {
   const { statusCode: status, errMsg, data, header: headers } = result;
   return {
@@ -25,15 +25,16 @@ const adapter: (config: AxiosRequestConfig) => Promise<AxiosResponse<any>> = con
   const wxAdapter: Promise<AxiosResponse> = new Promise((resolve, reject) => {
     let requestTast: WechatMiniprogram.RequestTask | null = wx.request({
       ...data,
-      success: res => settle(resolve,reject,transformResponse(res, config, requestTast as WechatMiniprogram.RequestTask)),
-      fail: err => reject(createError('wechat Request failed', config,null,requestTast,err))
+      success: res =>
+        settle(resolve, reject, transformResponse(res, config, requestTast as WechatMiniprogram.RequestTask)),
+      fail: err => reject(createError('wechat Request failed', config, null, requestTast, err)),
     });
-    
+
     // Handle Error request method
     const method = new Set(['OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT']);
     if (!method.has(data.method)) {
       requestTast?.abort();
-      reject(createError(`this ${data.method} method is wrong`,config,null, requestTast));
+      reject(createError(`this ${data.method} method is wrong`, config, null, requestTast));
     }
 
     if (config.cancelToken) {
