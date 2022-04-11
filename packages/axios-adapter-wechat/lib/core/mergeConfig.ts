@@ -2,8 +2,9 @@ import { AxiosRequestConfig } from 'axios';
 import buildFullPath from 'axios/lib/core/buildFullPath';
 import buildURL from 'axios/lib/helpers/buildURL';
 import utils from 'axios/lib/utils';
+import { btoa } from './btoa';
 
-export interface Options extends Omit<WechatMiniprogram.RequestOption, 'fail' | 'success' | 'complete'> {
+type Options = Omit<WechatMiniprogram.RequestOption, 'fail' | 'success' | 'complete'> & {
   /** 开发者服务器接口地址 */
   url: string;
   /** HTTP 请求方法
@@ -18,7 +19,8 @@ export interface Options extends Omit<WechatMiniprogram.RequestOption, 'fail' | 
    * - 'TRACE': HTTP 请求 TRACE;
    * - 'CONNECT': HTTP 请求 CONNECT; */
   method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
-}
+  validateStatus: (status: number) => boolean;
+};
 
 const defaultConfig: Options = {
   /** 开发者服务器接口地址 */
@@ -71,6 +73,7 @@ const defaultConfig: Options = {
    *
    * 最低基础库： `2.10.0` */
   timeout: 15000,
+  validateStatus: status => status >= 200 && status < 300,
 };
 
 function getMergedValue(target: any, source: any) {
@@ -117,7 +120,17 @@ export default (config: AxiosRequestConfig = {}): Options => {
 
   // 合并header参数
   if (!utils.isUndefined(config.headers)) {
-    requestParmas.header = getMergedValue(defaultConfig.header, config.headers);
+    requestParmas.header = getMergedValue(requestParmas.header, config.headers);
+  }
+  // HTTP basic authentication
+  if (!utils.isUndefined(config.auth)) {
+    const username = config.auth?.username || '';
+    const password = config.auth?.password
+      ? decodeURIComponent(encodeURIComponent(config.auth.password))
+      : '';
+    requestParmas.header = getMergedValue(requestParmas.header, {
+      Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+    });
   }
 
   // 返回转换之后的对象
