@@ -11,9 +11,11 @@
   "scripts": {
     "build:wechat": "yarn run clean && tsc --skipLibCheck --outDir dist",
     "clean": "rimraf dist",
-    "babel":"npx babel lib --out-dir dist --extensions '.ts'"
+    "babel": "npx babel lib --out-dir dist --extensions '.ts'"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "wechat",
     "axios",

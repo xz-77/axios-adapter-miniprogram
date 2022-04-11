@@ -20,3 +20,8 @@
 4. 目前仅扩展wx小程序网路请求
 
 
+## 于axios不同的地方
+
+* 微信的form表单提交[使用wx.request发送multipart/form-data请求的方法](https://developers.weixin.qq.com/community/develop/article/doc/0000cc0e5bc5d093c6f8be17254c13)
+
+

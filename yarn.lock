@@ -9395,10 +9395,10 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-verify-fabric@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/verify-fabric/-/verify-fabric-1.1.4.tgz#12ea62dfa5a5335e0dce4b2b1be73c85c158a933"
-  integrity sha512-aIrbXvFlXHpPeFZPR6DnQNS/8cyroo+sxICa2RnHBN/Weu25ZNRjAM1SdE0OH5Rt6KKiiyg/xTPwT0Ay50T1sg==
+verify-fabric@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmmirror.com/verify-fabric/-/verify-fabric-1.2.0.tgz#ee435bcc69a8e703f448e263c0a85ff2dab9e321"
+  integrity sha512-ybJbeVH4fJyohN5SjdkMWUDA1/QbCzSSxD6Dg20Pj9iik25eRX6hZeX3GsqBqTWKKMtbrZkZDCkT6jFxP3P2yQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.31.2"
     "@typescript-eslint/parser" "^4.31.2"
