@@ -2,9 +2,9 @@ module.exports = {
   root: true,
   extends: [require.resolve('verify-fabric/dist/eslint')],
   parserOptions: {
-    project: './tsconfig.base.json',
+    project: './tsconfig.json',
   },
-  rules:{
-    'compat/compat':0
-  }
+  rules: {
+    'compat/compat': 0,
+  },
 };

@@ -1,6 +1,6 @@
 {
-  "name": "axios-adapter-wechat",
-  "version": "0.1.1",
+  "name": "axios-adapter-miniprogram",
+  "version": "0.0.0",
   "description": "基于axios扩展wechat网络请求",
   "main": "./dist/index",
   "private": false,
@@ -9,7 +9,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build:wechat": "yarn run clean && tsc --skipLibCheck",
+    "build": "yarn run clean && tsc --skipLibCheck",
     "clean": "rimraf dist",
     "babel": "npx babel lib --out-dir dist --extensions '.ts'",
     "release": "standard-version"
@@ -34,7 +34,8 @@
   "author": "7",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.25.0"
+    "axios": "^0.25.0",
+    "axios-adapter-wechat": "^0.1.1"
   },
   "devDependencies": {
     "@types/wechat-miniprogram": "^3.4.0",
