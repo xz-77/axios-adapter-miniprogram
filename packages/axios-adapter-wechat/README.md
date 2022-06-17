@@ -3,7 +3,9 @@
 ## 使用方式
 
 ```bash
-yarn add axios-adapter-wechat
+$ yarn add axios-adapter-wechat
+# or
+$ npm install axios-adapter-wechat --save-dev
 ```
 
 ```javascript

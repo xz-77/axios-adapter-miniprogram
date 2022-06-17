@@ -6,7 +6,9 @@
 根据`Axios`适配了微信小程序`wx.request`没有进行环境的判断
 
 ```bash
-yarn add axios-adapter-wechat
+$ yarn add axios-adapter-wechat
+# or
+$ npm install axios-adapter-wechat --save-dev
 ```
 
 ```javascript
@@ -26,7 +28,9 @@ if (typeof wx !== 'undefined' && !!wx?.request && Object.prototype.toString.call
 根据`axios-adapter-wechat`集成了微信小程序环境判断，直接引用即可，其他的与`Axios`保持一致
 
 ```bash
-yarn add axios-adapter-miniprogram
+$ yarn add axios-adapter-miniprogram
+# or
+$ npm install axios-adapter-miniprogram --save-dev
 ```
 
 
