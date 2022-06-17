@@ -1,5 +1,39 @@
 # axios-adapter-miniprogram
 
+## 使用方式
+### axios-adapter-wechat
+
+根据`Axios`适配了微信小程序`wx.request`没有进行环境的判断
+
+```bash
+yarn add axios-adapter-wechat
+```
+
+```javascript
+
+// 判断小程序环境
+
+import axios, { AxiosAdapter } from 'axios';
+import wechatAdapter from 'axios-adapter-wechat';
+if (typeof wx !== 'undefined' && !!wx?.request && Object.prototype.toString.call(wx?.request) === '[object Function]') {
+  // 用来判断是否小程序环境 默认 timeout = 15s
+  axios.defaults.adapter = wechatAdapter as AxiosAdapter;
+}
+```
+
+### axios-adapter-miniprogram
+
+根据`axios-adapter-wechat`集成了微信小程序环境判断，直接引用即可，其他的与`Axios`保持一致
+
+```bash
+yarn add axios-adapter-miniprogram
+```
+
+
+```javascript
+import axios from 'axios-adapter-miniprogram';
+```
+
 ## 为什么要写这个库
 
 * 现在小程序的开发越来越多，每个小程序在网络请求方面都有官方自己的实现，但是不论在请求参数还是返回属性甚至使用习惯上，都不是很统一
