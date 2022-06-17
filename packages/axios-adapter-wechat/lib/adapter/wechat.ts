@@ -23,26 +23,26 @@ const adapter: (config: AxiosRequestConfig) => Promise<AxiosResponse<any>> = con
   const data: Options = mergeConfig(config);
 
   const wxAdapter: Promise<AxiosResponse> = new Promise((resolve, reject) => {
-    let requestTast: WechatMiniprogram.RequestTask | null = wx.request({
+    let requestTask: WechatMiniprogram.RequestTask | null = wx.request({
       ...data,
       success: res =>
-        settle(resolve, reject, transformResponse(res, config, requestTast as WechatMiniprogram.RequestTask)),
-      fail: err => reject(createError('wechat Request failed', config, null, requestTast, err)),
+        settle(resolve, reject, transformResponse(res, config, requestTask as WechatMiniprogram.RequestTask)),
+      fail: err => reject(createError('wechat Request failed', config, null, requestTask, err)),
     });
 
     // Handle Error request method
     const method = new Set(['OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT']);
     if (!method.has(data.method)) {
-      requestTast?.abort();
-      reject(createError(`this ${data.method} method is wrong`, config, null, requestTast));
+      requestTask?.abort();
+      reject(createError(`this ${data.method} method is wrong`, config, null, requestTask));
     }
 
     if (config.cancelToken) {
       // Handle cancellation
       config.cancelToken.promise.then(cancel => {
-        if (!requestTast) return;
-        requestTast.abort();
-        requestTast = null;
+        if (!requestTask) return;
+        requestTask.abort();
+        requestTask = null;
         reject(cancel);
       });
     }

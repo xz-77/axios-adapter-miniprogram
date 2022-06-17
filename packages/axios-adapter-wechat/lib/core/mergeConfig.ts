@@ -4,7 +4,7 @@ import buildURL from 'axios/lib/helpers/buildURL';
 import utils from 'axios/lib/utils';
 import { btoa } from './btoa';
 
-type Options = Omit<WechatMiniprogram.RequestOption, 'fail' | 'success' | 'complete'> & {
+export type Options = Omit<WechatMiniprogram.RequestOption, 'fail' | 'success' | 'complete'> & {
   /** 开发者服务器接口地址 */
   url: string;
   /** HTTP 请求方法
@@ -95,7 +95,7 @@ export default (config: AxiosRequestConfig = {}): Options => {
   // 获取传递的参数key
   const configKeys = Object.keys(config);
   // 定义请求参数对象
-  let requestParmas: Options = defaultConfig;
+  let requestParams: Options = defaultConfig;
   // 根据axios的BaseUrl和Url 拼接绝对路径url
   const fullPath = buildFullPath(config.baseURL, config.url);
   // 拼接params获取完成的请求path
@@ -104,35 +104,33 @@ export default (config: AxiosRequestConfig = {}): Options => {
   for (let i = 0; i < configKeys.length; i++) {
     if (defaultConfigKeys.has(configKeys[i])) {
       const key = configKeys[i] as keyof AxiosRequestConfig;
-      requestParmas = { ...requestParmas, [key]: config[key] };
+      requestParams = { ...requestParams, [key]: config[key] };
     }
   }
   // 请求url赋值
-  requestParmas.url = path;
+  requestParams.url = path;
   // method转大写
-  requestParmas.method = requestParmas.method?.toUpperCase() as Options['method'];
+  requestParams.method = requestParams.method?.toUpperCase() as Options['method'];
 
   // https://github.com/axios/axios/blob/master/lib/defaults.js#L28
   // data参数类型判断赋值
   if (!utils.isUndefined(config.data)) {
-    requestParmas.data = getMergedValue(undefined, config.data);
+    requestParams.data = getMergedValue(undefined, config.data);
   }
 
   // 合并header参数
   if (!utils.isUndefined(config.headers)) {
-    requestParmas.header = getMergedValue(requestParmas.header, config.headers);
+    requestParams.header = getMergedValue(requestParams.header, config.headers);
   }
   // HTTP basic authentication
   if (!utils.isUndefined(config.auth)) {
     const username = config.auth?.username || '';
-    const password = config.auth?.password
-      ? decodeURIComponent(encodeURIComponent(config.auth.password))
-      : '';
-    requestParmas.header = getMergedValue(requestParmas.header, {
+    const password = config.auth?.password ? decodeURIComponent(encodeURIComponent(config.auth.password)) : '';
+    requestParams.header = getMergedValue(requestParams.header, {
       Authorization: `Basic ${btoa(`${username}:${password}`)}`,
     });
   }
 
   // 返回转换之后的对象
-  return requestParmas;
+  return requestParams;
 };
