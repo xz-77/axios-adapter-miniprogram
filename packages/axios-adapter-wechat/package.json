@@ -1,6 +1,6 @@
 {
   "name": "axios-adapter-wechat",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "基于axios扩展wechat网络请求",
   "main": "./dist/index",
   "private": false,
