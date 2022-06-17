@@ -1,6 +1,6 @@
 {
   "name": "axios-adapter-miniprogram",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "基于axios扩展wechat网络请求",
   "main": "./dist/index",
   "private": false,
