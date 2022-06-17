@@ -4,6 +4,10 @@
   "description": "基于axios扩展wechat网络请求",
   "main": "./dist/index",
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build:wechat": "yarn run clean && tsc --skipLibCheck",
     "clean": "rimraf dist",
@@ -12,6 +16,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xz-77/axios-adapter-miniprogram.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xz-77/axios-adapter-miniprogram/issues"
+  },
+  "homepage": "https://github.com/xz-77/axios-adapter-miniprogram#readme",
   "keywords": [
     "wechat",
     "axios",
