@@ -1,6 +1,26 @@
 {
-  "files": [],
-  "references": [
-    {"path": "./packages/axios-adapter"},
-  ]
+  "compilerOptions": {
+    "module": "ES6",
+    "target": "ES6",
+    "strict": true,
+    "composite": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "axios-adapter-wechat": ["packages/axios-adapter-wechat/lib/index.ts"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+
+  "exclude": ["node_modules", "dist"]
 }

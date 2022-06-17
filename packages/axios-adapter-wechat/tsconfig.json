@@ -1,9 +1,13 @@
 {
-  "extends": "../../tsconfig.base",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./lib",
-    "outDir": "./dist",
+    "module": "commonjs",
+    "rootDir": "lib",
+    "outDir": "dist",
     "baseUrl": ".",
-    "declaration":true,
-  }
+    "declaration": true,
+    "allowJs": true,
+    "noImplicitAny": false
+  },
+  "include": ["lib"]
 }
